@@ -4,7 +4,7 @@
   "description": "automex technologies",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app",
+    "start": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Mujjuni",
