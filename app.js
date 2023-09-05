@@ -6,6 +6,10 @@ const app = express()
 
 app.use(express.json())
 
+app.use((req, res, next) => {
+    req.requestTime = new Date().toISOString()
+    next()
+})
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
 
 //function to get all tours
@@ -88,14 +92,50 @@ const deleteTour = (req, res) => {
     })
 }
 
-// app.get('/api/v1/tours', getAllTours)
-// app.get('/api/v1/tours/:id', getTour)
-// app.post('/api/v1/tours', createTour)
-// app.patch('/api/v1/tours/:id', updateTour)
-// app.delete('/api/v1/tours/:id', deleteTour)
+const getAllUsers = (req, res) => {
+    res.status(500).json({
+        status: "success",
+        msg: "Route under development"
+    })
+}
+
+const createUser = (req, res) => {
+    res.status(500).json({
+        status: "success",
+        msg: "Route under development"
+    })
+}
+
+const getUser = (req, res) => {
+    res.status(500).json({
+        status: "success",
+        msg: "Route under development"
+    })
+}
+
+const updateUser = (req, res) => {
+    res.status(500).json({
+        status: "success",
+        msg: "Route under development"
+    })
+}
+
+const deleteUser = (req, res) => {
+    res.status(500).json({
+        status: "success",
+        msg: "Route under development"
+    })
+}
+
+
+
+
 
 app.route('/api/v1/tours').get(getAllTours).post(createTour)
 app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser)
+app.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
 
 const port = 3000
 app.listen(port, () => {
