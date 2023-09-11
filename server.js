@@ -2,6 +2,11 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './config.env' });
 
+process.on('uncaughtException', (err) => {
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+
 const mongoose = require('mongoose');
 
 const app = require('./app');
@@ -31,6 +36,7 @@ const server = app.listen(port, () => {
 process.on('unhandledRejection', (err) => {
   console.log(err.name, err.message);
   server.close(() => {
+    console.log('shutting down .....');
     process.exit(1);
   });
 });
