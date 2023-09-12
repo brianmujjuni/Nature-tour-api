@@ -66,5 +66,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(new AppError('Please login again', 401));
   }
 
+  res.user = freshUser;
+
   next();
 });
