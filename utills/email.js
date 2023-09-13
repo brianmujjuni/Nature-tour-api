@@ -12,8 +12,8 @@ const sendEmail = async (options) => {
 
   const mailOptions = {
     from: 'Automex technologies<noreply@mail.com>',
-    to: options.email,
-    //to: 'brianmujjuni@gmail.com',
+    //to: options.email,
+    to: 'brianmujjuni@gmail.com',
     subject: options.subject,
     text: options.message,
     //html
