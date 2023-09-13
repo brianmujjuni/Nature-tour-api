@@ -3,6 +3,7 @@ const AppError = require('../utills/appError');
 
 const catchAsync = require('../utills/catchAsync');
 
+//check for fields to update
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
   Object.keys(obj).forEach((el) => {
