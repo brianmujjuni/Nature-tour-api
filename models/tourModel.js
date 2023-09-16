@@ -131,7 +131,13 @@ tourSchema.pre('save', function (next) {
 //   this.guides = await Promise.all(guidesPromises);
 //   next();
 // });
-
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
+  next();
+});
 //agregation middleware
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { secreteTour: { $ne: true } } });
