@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const AppError = require('../utills/appError');
-
 const catchAsync = require('../utills/catchAsync');
+const { deleteOne } = require('./HandlerFactory');
 
 //check for fields to update
 const filterObj = (obj, ...allowedFields) => {
@@ -25,7 +25,8 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createUser = (req, res) => {
+exports.createUser = (req, res, next) => {
+ 
   res.status(500).json({
     status: 'success',
     msg: 'Route under development',
@@ -46,12 +47,7 @@ exports.updateUser = (req, res) => {
   });
 };
 
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'success',
-    msg: 'Route under development',
-  });
-};
+exports.deleteUser = deleteOne(User);
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.passwordConfirm) {
