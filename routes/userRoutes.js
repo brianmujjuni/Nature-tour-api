@@ -18,6 +18,7 @@ const {
   updatePassword,
   protect,
 } = require('../controllers/authController');
+
 //auth routes
 router.route('/signup').post(signup);
 router.route('/login').post(login);
