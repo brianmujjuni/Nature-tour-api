@@ -1,30 +1,18 @@
 //const Tour = require('../models/tourModel');
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../utills/apiFeatures');
+
 const catchAsync = require('../utills/catchAsync');
-const AppError = require('../utills/appError');
-const { deleteOne, updateOne, createOne, getOne } = require('./HandlerFactory');
+// const AppError = require('../utills/appError');
+const {
+  deleteOne,
+  updateOne,
+  createOne,
+  getOne,
+  getAll,
+} = require('./HandlerFactory');
 
 //function to get all tours
-exports.getAllTours = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Tour.find(), req.query)
-    .filter()
-    .sort()
-    .limitingFields()
-    .paginate();
-
-  //excute the query
-  const tours = await features.query;
-
-  res.status(200).json({
-    status: 'success',
-    results: tours.length,
-    data: {
-      tours,
-    },
-  });
-});
-
+exports.getAllTours = getAll(Tour);
 exports.getTour = getOne(Tour, { path: 'reviews' });
 exports.createTour = createOne(Tour);
 exports.updateTour = updateOne(Tour);

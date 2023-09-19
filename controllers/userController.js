@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const AppError = require('../utills/appError');
 const catchAsync = require('../utills/catchAsync');
-const { deleteOne, updateOne, createOne } = require('./HandlerFactory');
+const { deleteOne, updateOne, createOne, getOne } = require('./HandlerFactory');
 
 //check for fields to update
 const filterObj = (obj, ...allowedFields) => {
@@ -27,12 +27,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 
 exports.createUser = createOne(User);
 
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'success',
-    msg: 'Route under development',
-  });
-};
+exports.getUser = getOne(User);
 
 //Do not update password with this
 exports.updateUser = updateOne(User);
