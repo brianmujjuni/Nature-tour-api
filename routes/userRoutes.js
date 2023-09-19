@@ -18,6 +18,7 @@ const {
   updatePassword,
 
   protect,
+  restrictTo,
 } = require('../controllers/authController');
 
 //auth routes
@@ -31,6 +32,9 @@ router.route('/deleteMe').delete(protect, deleteMe);
 
 //user routes
 router.route('/:id').delete(deleteUser).patch(updateUser);
-router.route('/').post(createUser).get(getAllUsers);
+router
+  .route('/')
+  .post(protect, restrictTo('admin'), createUser)
+  .get(protect, restrictTo('admin'), getAllUsers);
 
 module.exports = router;

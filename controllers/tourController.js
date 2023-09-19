@@ -39,7 +39,6 @@ exports.getTour = catchAsync(async (req, res, next) => {
 });
 
 exports.createTour = createOne(Tour);
-
 exports.updateTour = updateOne(Tour);
 exports.deleteTour = deleteOne(Tour);
 
