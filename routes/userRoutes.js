@@ -8,6 +8,7 @@ const {
   deleteMe,
   updateUser,
   getAllUsers,
+  createUser,
 } = require('../controllers/userController');
 const {
   signup,
@@ -30,6 +31,6 @@ router.route('/deleteMe').delete(protect, deleteMe);
 
 //user routes
 router.route('/:id').delete(deleteUser).patch(updateUser);
-router.route('/').get(getAllUsers);
+router.route('/').post(createUser).get(getAllUsers);
 
 module.exports = router;
