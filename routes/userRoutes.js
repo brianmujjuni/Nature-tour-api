@@ -30,15 +30,16 @@ router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword/:token').patch(resetPassword);
 router.route('/updateMyPassword').patch(protect, updatePassword);
 
-router.route('/updateMe').patch(protect, updateMe);
-router.route('/deleteMe').delete(protect, deleteMe);
-router.route('/me').get(protect, getMe, getUser);
+//protect all the routes with this middleware
+router.use(protect);
+
+router.route('/updateMe').patch(updateMe);
+router.route('/deleteMe').delete(deleteMe);
+router.route('/me').get(getMe, getUser);
 
 //user routes
+router.use(restrictTo('admin'));
 router.route('/:id').delete(deleteUser).patch(updateUser);
-router
-  .route('/')
-  .post(protect, restrictTo('admin'), createUser)
-  .get(protect, restrictTo('admin'), getAllUsers);
+router.route('/').post(createUser).get(getAllUsers);
 
 module.exports = router;
