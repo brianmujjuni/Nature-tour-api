@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const path = require('path');
 
 const AppError = require('./utills/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -14,6 +15,14 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
+
+//render templates
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
+//serve public files
+app.use(express.static(path.join(__dirname, 'public')));
+
 //Set security HTTP headers
 app.use(helmet());
 //Body parser,reading data from body into req.body
@@ -51,13 +60,14 @@ const limiter = rateLimit({
 //limit number of requests
 app.use('/api', limiter);
 
-//serve public files
-app.use(express.static(`${__dirname}/public`));
-
 //show request time
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
+});
+
+app.get('/', (req, res) => {
+  res.status(200).render('base');
 });
 
 //mounting routers
