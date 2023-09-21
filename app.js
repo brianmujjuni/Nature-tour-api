@@ -67,7 +67,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.status(200).render('base', { name: 'Automex technology' });
+  res.status(200).render('base');
+});
+
+app.get('/overview', (req, res) => {
+  res.status(200).render('overview', { title: 'Overview' });
+});
+
+app.get('/tour', (req, res) => {
+  res.status(200).render('tour', { title: 'Tour' });
 });
 
 //mounting routers
