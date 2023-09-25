@@ -5,6 +5,9 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 const path = require('path');
 
 const AppError = require('./utills/appError');
@@ -24,10 +27,15 @@ app.set('views', path.join(__dirname, 'views'));
 //serve public files
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Enable CORS
+app.use(cors());
+
 //Set security HTTP headers
 app.use(helmet());
 //Body parser,reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
+//parse cookie
+app.use(cookieParser());
 
 //Data sanitization against injections
 app.use(mongoSanitize());

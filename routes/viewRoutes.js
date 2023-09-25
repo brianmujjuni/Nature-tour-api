@@ -1,6 +1,10 @@
 const express = require('express');
 
-const { getOverview, getTour } = require('../controllers/viewController');
+const {
+  getOverview,
+  getTour,
+  getLoginForm,
+} = require('../controllers/viewController');
 
 const CSP = 'Content-Security-Policy';
 const POLICY =
@@ -8,7 +12,7 @@ const POLICY =
   "base-uri 'self';block-all-mixed-content;" +
   "font-src 'self' https: data:;" +
   "frame-ancestors 'self';" +
-  "img-src http://localhost:8000 'self' blob: data:;" +
+  "img-src http://localhost:3000 'self' blob: data:;" +
   "object-src 'none';" +
   "script-src https: cdn.jsdelivr.net cdnjs.cloudflare.com api.mapbox.com 'self' blob: ;" +
   "script-src-attr 'none';" +
@@ -25,5 +29,6 @@ router.use((req, res, next) => {
 router.get('/', getOverview);
 
 router.get('/tour/:slug', getTour);
+router.get('/login', getLoginForm);
 
 module.exports = router;
