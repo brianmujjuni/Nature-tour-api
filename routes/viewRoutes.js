@@ -9,7 +9,7 @@ const { isLoggedIn } = require('../controllers/authController');
 
 const CSP = 'Content-Security-Policy';
 const POLICY =
-  "default-src 'self' https://*.mapbox.com http://127.0.0.1:3000;" +
+  "default-src 'self' https://*.mapbox.com http://127.0.0.1:3000 ws://localhost:61135;" +
   "base-uri 'self';block-all-mixed-content;" +
   "font-src 'self' https: data:;" +
   "frame-ancestors 'self';" +
