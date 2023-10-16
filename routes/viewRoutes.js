@@ -8,7 +8,7 @@ const {
 
 const CSP = 'Content-Security-Policy';
 const POLICY =
-  "default-src 'self' https://*.mapbox.com ;" +
+  "default-src 'self' https://*.mapbox.com http://127.0.0.1:3000;" +
   "base-uri 'self';block-all-mixed-content;" +
   "font-src 'self' https: data:;" +
   "frame-ancestors 'self';" +
