@@ -5,6 +5,7 @@ const {
   getTour,
   getLoginForm,
 } = require('../controllers/viewController');
+const { isLoggedIn } = require('../controllers/authController');
 
 const CSP = 'Content-Security-Policy';
 const POLICY =
@@ -20,6 +21,8 @@ const POLICY =
   'upgrade-insecure-requests;';
 
 const router = express.Router();
+
+router.use(isLoggedIn);
 
 router.use((req, res, next) => {
   res.setHeader(CSP, POLICY);
