@@ -40,7 +40,7 @@ router.route('/me').get(getMe, getUser);
 
 //user routes
 router.use(restrictTo('admin'));
-router.route('/:id').delete(deleteUser).patch(updateUser);
+router.route('/:id').delete(deleteUser).patch(updateUser).get(getUser);
 router.route('/').post(createUser).get(getAllUsers);
 
 module.exports = router;
