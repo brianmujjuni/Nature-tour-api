@@ -27,20 +27,21 @@ const {
 router.route('/signup').post(signup);
 router.route('/login').post(login);
 router.route('/logout').get(logout);
+
 router.route('/forgotPassword').post(forgotPassword);
 router.route('/resetPassword/:token').patch(resetPassword);
-router.route('/updateMyPassword').patch(protect, updatePassword);
 
-//protect all the routes with this middleware
+//Protect all routes after this middleware
 router.use(protect);
 
+router.route('/updateMyPassword').patch(updatePassword);
+router.route('/me').get(getMe, getUser);
 router.route('/updateMe').patch(updateMe);
 router.route('/deleteMe').delete(deleteMe);
-router.route('/me').get(getMe, getUser);
 
 //user routes
 router.use(restrictTo('admin'));
-router.route('/:id').delete(deleteUser).patch(updateUser).get(getUser);
 router.route('/').post(createUser).get(getAllUsers);
+router.route('/:id').delete(deleteUser).patch(updateUser).get(getUser);
 
 module.exports = router;
